@@ -10,7 +10,7 @@ import { config } from "../../functions/config";
 import { importAllImages } from "../../functions/common";
 import styles from "./header.module.css";
 import { Link } from "react-router-dom";
-import MblLogo from '../../images/home/Swoordsofblood-logo-mobile.png'
+import MblLogo from "../../images/home/Swoordsofblood-logo-mobile.png";
 export default function Header({ toggleSidebar }) {
   const { strings, lang, locales, SetLanguage } = useContext(Localization);
   const [langMenu, setLangMenu] = useState([]);
@@ -65,42 +65,55 @@ export default function Header({ toggleSidebar }) {
         </Link>
       </div>
       {sidebarOpened ? (
-      <>
-          <button onClick={toggleButton} id="close-ico" className={styles.close}>
+        <>
+          <button
+            onClick={toggleButton}
+            id="close-ico"
+            className={styles.close}
+          >
             <FontAwesomeIcon icon={faXmark} />
           </button>
-          <button onClick={toggleButton} id="open-ico" style={{display:"none"}} className={styles.hamburger}>
+          <button
+            onClick={toggleButton}
+            id="open-ico"
+            style={{ display: "none" }}
+            className={styles.hamburger}
+          >
             <FontAwesomeIcon icon={faBars} />
-          </button></>
-    
+          </button>
+        </>
       ) : (
-        
-       <>
-            <button onClick={toggleButton} id="open-ico" className={styles.hamburger}>
-              <FontAwesomeIcon icon={faBars} />
-            </button>
-            <button onClick={toggleButton} id="close-ico" style={{ display: "none" }} className={styles.close}>
-              <FontAwesomeIcon icon={faXmark} />
-            </button></>
-     
+        <>
+          <button
+            onClick={toggleButton}
+            id="open-ico"
+            className={styles.hamburger}
+          >
+            <FontAwesomeIcon icon={faBars} />
+          </button>
+          <button
+            onClick={toggleButton}
+            id="close-ico"
+            style={{ display: "none" }}
+            className={styles.close}
+          >
+            <FontAwesomeIcon icon={faXmark} />
+          </button>
+        </>
       )}
       <img
         src={images["logo.webp"]}
         alt="Swords of Blood"
-        className={styles.headerLogo+" "+"maxno"}
+        className={styles.headerLogo + " " + "maxno"}
       />
-      <img
-        src={MblLogo}
-        alt="Swords of Blood"
-        className={"maxnoso"}
-      />
+      <img src={MblLogo} alt="Swords of Blood" className={"maxnoso"} />
       <div className={styles.adressAndLanugage}>
         {/* <a href="https://swordsofblood.idexo.com/vesting" className={styles.hrefContactAddress}> */}
-          <p className={styles.contactAddress}>
-            {strings.tokenAddress}: {config.tokenAddress}
-          </p>
+        <p className={styles.contactAddress}>
+          {strings.tokenAddress}: {config.tokenAddress}
+        </p>
         {/* </a> */}
-        <div className={styles.languageChangingDropdown}>
+        {/* <div className={styles.languageChangingDropdown}>
           <button ref={langSwitch} className={styles.dropbtn}>
             <div className={styles.languageAndCountryName}>
               <span className={styles.iconAndCountry}>
@@ -117,7 +130,7 @@ export default function Header({ toggleSidebar }) {
           <div className={styles.dropdownContent}>
             {langMenu.length > 0 && <>{langMenu}</>}
           </div>
-        </div>
+        </div> */}
       </div>
     </header>
   );

@@ -1,8 +1,11 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Localization from "../../context/localization";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleChevronDown } from "@fortawesome/free-solid-svg-icons";
+import {
+  faAngleDown,
+  faCircleChevronDown,
+} from "@fortawesome/free-solid-svg-icons";
 import { config } from "../../functions/config";
 import { importAllImages } from "../../functions/common";
 import { socialLinks } from "../social-links";
@@ -10,8 +13,11 @@ import styles from "./sidebar.module.css";
 import gift from "../../images/sidebar-icons/gift_animation.gif";
 
 export default function Sidebar({ showSidebar, setShowSidebar }) {
-  const { strings } = useContext(Localization);
+  const { strings, lang, locales, SetLanguage } = useContext(Localization);
   const images = importAllImages();
+
+  const [langMenu, setLangMenu] = useState([]);
+  const langSwitch = useRef(null);
 
   const imageIconsPath = (name) => {
     return images[`sidebar-icons/${name}.png`];
@@ -24,6 +30,35 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
     closeIco.classList.add("no-open");
     openIco.classList.add("imp-mbl");
   };
+
+  useEffect(() => {
+    let langs = [];
+    locales.forEach((l) => {
+      if (l !== lang) {
+        langs.push(
+          // eslint-disable-next-line jsx-a11y/anchor-is-valid
+          <Link
+            key={l}
+            to="#"
+            className={styles.content}
+            onClick={(_e) => {
+              SetLanguage(l);
+            }}
+          >
+            <img
+              src={images[`lang/${l}.png`]}
+              alt="language"
+              className={styles.flag}
+            />{" "}
+            {l.toUpperCase()}
+          </Link>
+        );
+      }
+    });
+    setLangMenu(langs);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lang]);
+
   return (
     <div
       className={[styles.sidebar, showSidebar ? styles.showSidebar : ""].join(
@@ -262,11 +297,33 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
             }
           >
             <div className={styles.gif_container}>
-              <img src={gift} alt={"gift"} className={styles.gif} />
               Merch
+              <img src={gift} alt={"gift"} className={styles.gif} />
             </div>
           </NavLink>
         </div>
+        {/* // -- */}
+        <div className={styles.adressAndLanugage}>
+          <div className={styles.languageChangingDropdown}>
+            <button ref={langSwitch} className={styles.dropbtn}>
+              <div className={styles.languageAndCountryName}>
+                <span className={styles.iconAndCountry}>
+                  <img
+                    src={images[`lang/${lang}.png`]}
+                    alt="language"
+                    className={styles.flag}
+                  />{" "}
+                  {lang.toUpperCase()}
+                </span>
+                <FontAwesomeIcon icon={faAngleDown} />
+              </div>
+            </button>
+            <div className={styles.dropdownContent}>
+              {langMenu.length > 0 && <>{langMenu}</>}
+            </div>
+          </div>
+        </div>
+        {/* //  */}
       </div>
       <div
         onClick={() => {

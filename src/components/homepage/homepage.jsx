@@ -29,7 +29,7 @@ export default function Homepage() {
       <Facilities />
       <Partners />
       <Team />
-      <ContactUs />
+      {/* <ContactUs /> */}
     </>
   );
 }

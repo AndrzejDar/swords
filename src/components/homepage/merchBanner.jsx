@@ -22,7 +22,9 @@ const MerchBanner = () => {
               <p>"No Guts, No Glory!"</p>
               <p>
                 Unveil Exclusive &nbsp;
-                <a href="https://merch.swordsofblood.com">Merch</a>
+                <a href="https://merch.swordsofblood.com" target="#">
+                  Merch
+                </a>
               </p>
             </div>
           </div>
