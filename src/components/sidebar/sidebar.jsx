@@ -252,7 +252,7 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
             Token Claimer
           </NavLink>
           <NavLink
-            to="https://swordsofblood.com"
+            to="https://merch.swordsofblood.com"
             className={({ isActive }) =>
               [
                 styles.navItem,
