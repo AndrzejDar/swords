@@ -42,7 +42,7 @@ export default function SliderModes({ setTitle, strings }) {
       className="mySwiper"
     >
       {imgs.map((val, i) => (
-        <SwiperSlide>
+        <SwiperSlide key={i}>
           {({ isActive }) => (
             <img
               aria-label={isActive ? "active-image" : ""}

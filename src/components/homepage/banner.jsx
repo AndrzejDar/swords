@@ -530,29 +530,32 @@ export default function Banner() {
             <Video muted />
           </Suspense>
         </div>
-          <div
-            className={[
-              styles.connectWalletContainer,
-              curStep === 1 ? styles.step1 : "",
-            ].join(" ")}
-          >
-            <div className={styles.presaleWrap}>
-              <img
-                      src={images["home/presale.webp"]}
-                      alt="Swords of Blood"
-                      className={styles.presaleImage}
-                    />
-            </div>
-            <div className={styles.swdtknContainer}>
-            <p className={styles.swdtkn}>GET YOUR SWDTKN from</p>
-            </div>
-
-            <div className={styles.MEXC}>
+        <div
+          className={[
+            styles.connectWalletContainer,
+            curStep === 1 ? styles.step1 : "",
+          ].join(" ")}
+        >
+          <div className={styles.presaleWrap}>
+            <img
+              src={images["home/presale.webp"]}
+              alt="Swords of Blood"
+              className={styles.presaleImage}
+            />
+          </div>
+          <div className={styles.swdtknContainer}>
+            <p className={styles.swdtkn}>GET YOUR SWDTKN FROM</p>
+          </div>
+          <div className={styles.MEXC}>
             <a href="https://www.mexc.com/exchange/SWDTKN_USDT" target="_blank">
-              <img src={images['MEXC.png']} alt="MEXC" className={styles.mexcimg}/>
-              </a>
-            </div>
-            {/*
+              <img
+                src={images["MEXC.png"]}
+                alt="MEXC"
+                className={styles.mexcimg}
+              />
+            </a>
+          </div>
+          {/*
             <div
               className={[
                 styles.presaleWrapper,
@@ -573,12 +576,12 @@ export default function Banner() {
                         style={{ textTransform: "uppercase" }}
                       >
                       {strings.presaleEnded}{" "} */}
-                        {/* {presaleData.currentStage >= presaleData.totalPeriods ? presaleData.totalPeriods : presaleData.currentStage + 1}*/}{" "}
-                    {/*   </span>
+          {/* {presaleData.currentStage >= presaleData.totalPeriods ? presaleData.totalPeriods : presaleData.currentStage + 1}*/}{" "}
+          {/*   </span>
 
                       <span className={styles.amountAndText}> */}
-                        {/* 1 {config.tokenSymbol} = {presaleData.currentPrice} USDT */}
-                    {/*    Launch price:{" "}
+          {/* 1 {config.tokenSymbol} = {presaleData.currentPrice} USDT */}
+          {/*    Launch price:{" "}
                         <span className={`${styles.gold_bg} red-high`}>
                           $0.015
                         </span>
@@ -588,8 +591,8 @@ export default function Banner() {
                   <div className={styles.instructions}>
                     <p>{strings.stayTuned}</p>
                   </div> */}
-                  {/* {presaleData.nextPrice ? ( */}
-                  {/* <p className={styles.info}>
+          {/* {presaleData.nextPrice ? ( */}
+          {/* <p className={styles.info}>
                     {strings.buyBefore
                       .replace("{STAGE}", presaleData.currentStage + 2)
                       .replace("{PRICE}", presaleData.nextPrice)}
@@ -599,18 +602,17 @@ export default function Banner() {
                       Launch price: <span className="red-high">$0.015</span>
                     </span>
                   </p> */}
-                  {/* ) : (
+          {/* ) : (
                     <p className={styles.info}>{strings.buyBeforeTheEnd}</p>
                   )} */}
-                  {/* <div className={styles.progress}>
+          {/* <div className={styles.progress}>
                     <div
                       ref={progressLine}
                       className={styles.progressDone}
                       data-done={parseInt(presaleData.stagePercentsCompleted)}
                     ></div>
                   </div> */}
-
-                  {/* <div className={styles.amountContainer}>
+          {/* <div className={styles.amountContainer}>
                     <p className={styles.amountTextAndAmountNumber}>
                       <span className={styles.amountText}>{strings.soldTtl}</span>
                       <span className={styles.amountNumber}>
@@ -643,12 +645,10 @@ export default function Banner() {
                       </p>
                     )}
                   </div> */}
-
-                  {/* <Countdown /> */}
-            {/*    </>
+          {/* <Countdown /> */}
+          {/*    </>
               )} */}
-
-              {/* {curStep !== 1 && !hideConnectButton && (
+          {/* {curStep !== 1 && !hideConnectButton && (
                 <button
                   onClick={connectWallet}
                   className={`${styles.connectWallet} ${styles.loadingWalletButton}`}
@@ -657,8 +657,7 @@ export default function Banner() {
                 </button>
               )} */}
           {/*  </div> */}
-
-            {/* {!inLoading && presaleData && curStep === 1 && (
+          {/* {!inLoading && presaleData && curStep === 1 && (
               <>
                 {!presaleData.buyBtnDisabled ? (
                   <div className={styles.buyingMethod}>
@@ -718,12 +717,10 @@ export default function Banner() {
             {inLoading && loadingInfoText && (
               <span className={styles.loadingInfoText}>{loadingInfoText}</span>
             )} */}
-
-            {/* <div className={styles.thankMessage}>
+          {/* <div className={styles.thankMessage}>
               <p>{strings.thankyouForParticipating}</p>
             </div> */}
-            
-          </div>
+        </div>
       </div>
       {/* <ModalConnectWallet
         showModal={showConnectModal}

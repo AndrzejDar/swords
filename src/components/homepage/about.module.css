@@ -27,6 +27,10 @@
   padding-top: 0;
 }
 
+.logo {
+  width: 350px;
+}
+
 @media only screen and (max-width: 1440px) {
   .information .textContainer br {
     display: none;

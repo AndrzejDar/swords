@@ -17,9 +17,9 @@ export default function GameMode() {
         <h3>{title}</h3>
         <img src={images["svg/double-right.svg"]} alt="right" />
       </div>
-      <p className={style.text}>
+      {/* <p className={style.text}>
         {strings.modeInfo} <a href="/presale/">SWDTKN presale!</a>
-      </p>
+      </p> */}
     </div>
   );
 }

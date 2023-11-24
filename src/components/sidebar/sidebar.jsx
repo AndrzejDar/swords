@@ -7,6 +7,7 @@ import { config } from "../../functions/config";
 import { importAllImages } from "../../functions/common";
 import { socialLinks } from "../social-links";
 import styles from "./sidebar.module.css";
+import gift from "../../images/sidebar-icons/gift_animation.gif";
 
 export default function Sidebar({ showSidebar, setShowSidebar }) {
   const { strings } = useContext(Localization);
@@ -68,7 +69,7 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
             className={`${styles.dropDownContainer} ${styles.aboutDropDownContainer}`}
             onClick={() => setProjectDropDown(false)}
           >
-            <p
+            <div
               className={[styles.dropdownHeader, styles.navBtn].join(" ")}
               onClick={() => setAboutDropDown((prev) => !prev)}
             >
@@ -82,7 +83,7 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
                 }`}
                 icon={faCircleChevronDown}
               />
-            </p>
+            </div>
 
             <div
               className={`${styles.dropdownItems} ${
@@ -183,7 +184,7 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
             className={`${styles.dropDownContainer} ${styles.projectDropDownContainer}`}
             onClick={() => setAboutDropDown(false)}
           >
-            <p
+            <div
               className={[styles.dropdownHeader, styles.navBtn].join(" ")}
               onClick={() => setProjectDropDown((prev) => !prev)}
             >
@@ -197,7 +198,7 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
                 }`}
                 icon={faCircleChevronDown}
               />
-            </p>
+            </div>
 
             <div
               className={[
@@ -249,6 +250,21 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
             }
           >
             Token Claimer
+          </NavLink>
+          <NavLink
+            to="https://swordsofblood.com"
+            className={({ isActive }) =>
+              [
+                styles.navItem,
+                styles.navBtn,
+                isActive ? styles.active : "",
+              ].join(" ")
+            }
+          >
+            <div className={styles.gif_container}>
+              <img src={gift} alt={"gift"} className={styles.gif} />
+              Merch
+            </div>
           </NavLink>
         </div>
       </div>

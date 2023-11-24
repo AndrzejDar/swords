@@ -3,7 +3,7 @@ import Localization from "../../context/localization";
 import { config } from "../../functions/config";
 import { importAllImages } from "../../functions/common";
 import styles from "./about.module.css";
-import './custom.css'
+import "./custom.css";
 export default function About() {
   const { strings } = useContext(Localization);
   const images = importAllImages();
@@ -11,7 +11,12 @@ export default function About() {
   return (
     <div className={styles.about}>
       <h1 className={[styles.heading, "heading"].join(" ")}>
-        {config.appName}
+        <img
+          src={images["logo_medium.svg"]}
+          alt={strings.logoTitle}
+          className={styles.logo}
+        />
+        {/* {config.appName} */}
       </h1>
       <h1 className="ult-tag">THE ULTIMATE DIABLO KILLER</h1>
       <img

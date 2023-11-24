@@ -9,11 +9,13 @@ import Partners from "./partners";
 import Video from "./video";
 import GameMode from "./GameMode";
 import VideoHome from "./videoHome";
+import MerchBanner from "./merchBanner";
 
 export default function Homepage() {
   return (
     <>
       <Banner />
+      <MerchBanner />
       <VideoHome title="Gameplay" />
       <WhatYouGet />
       <About />

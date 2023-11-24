@@ -32,7 +32,7 @@ let BannerVideo = () => {
           className={["image desk-only", styles.image].join(" ")}
           autoPlay
           loop
-          playsinline
+          playsInline
         >
           <source src={video1} type="video/webm" />
           <source src={video2} type="video/mp4" />
