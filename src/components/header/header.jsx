@@ -113,7 +113,7 @@ export default function Header({ toggleSidebar }) {
           {strings.tokenAddress}: {config.tokenAddress}
         </p>
         {/* </a> */}
-        {/* <div className={styles.languageChangingDropdown}>
+        <div className={styles.languageChangingDropdown}>
           <button ref={langSwitch} className={styles.dropbtn}>
             <div className={styles.languageAndCountryName}>
               <span className={styles.iconAndCountry}>
@@ -130,7 +130,7 @@ export default function Header({ toggleSidebar }) {
           <div className={styles.dropdownContent}>
             {langMenu.length > 0 && <>{langMenu}</>}
           </div>
-        </div> */}
+        </div>
       </div>
     </header>
   );

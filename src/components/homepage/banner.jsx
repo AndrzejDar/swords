@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect, useRef, Suspense, lazy } from "react";
 import Web3Provider from "../../context/web3provider";
 import Localization from "../../context/localization";
-// import Video from './BannerVideo'
+import Video from "./bannerVideo";
 
 import {
   SetGlobalProvider,
@@ -32,7 +32,7 @@ import Countdown from "../countdown/Countdown";
 import "./custom.css";
 import ModalConnectWallet from "../modal-connect-wallet/modal-connect-wallet";
 
-const Video = lazy(() => import("./bannerVideo"));
+// const Video = lazy(() => import("./bannerVideo"));
 
 export default function Banner() {
   const [refresh, setRefresh] = useState(0);
@@ -50,41 +50,6 @@ export default function Banner() {
   const progressLine = useRef(null);
   const inFetch = useRef(false);
   const images = importAllImages();
-
-  // const connectWallet = async () => {
-  //   const thisNetwork = setNetwork(
-  //     process.env.NODE_ENV === "development" ? "BSC" : "ETHEREUM"
-  //   );
-
-  //   if (!web3provider.current.status) {
-  //     web3provider.current.network = thisNetwork;
-  //     setShowConnectModal(true);
-  //   } else {
-  //     if (
-  //       web3provider.current.instance.constructor.name.toLowerCase() ===
-  //         "jsonrpcprovider" ||
-  //       web3provider.current.instance.constructor.name.toLowerCase() === "r" ||
-  //       thisNetwork !== web3provider.current.network
-  //     ) {
-  //       Disconnect();
-  //       web3provider.current.network = thisNetwork;
-  //       setShowConnectModal(true);
-  //     } else {
-  //       loadUserData();
-  //     }
-  //   }
-  // };
-
-  const loadUserData = () => {
-    // setHideConnectButton(true);
-
-    let ci = setInterval(async () => {
-      if (!inFetch.current) {
-        clearInterval(ci);
-        await getPrepresaleData(1);
-      }
-    }, 100);
-  };
 
   const get_percent = (
     totalTokensSold,
@@ -180,303 +145,11 @@ export default function Banner() {
     }
   };
 
-  // const buyTokens = async (amount, purchaseToken) => {
-  //   if (!web3provider.current.status) {
-  //     Disconnect();
-  //     return false;
-  //   }
-
-  //   if (amount > presaleData.tokensLeft) {
-  //     if (presaleData.tokensLeft > presaleData.minimumBuyAmount)
-  //       alert(
-  //         strings.minimumPurchWarn
-  //           .replace(
-  //             `{VALUE1}`,
-  //             presaleData.minimumBuyAmount?.toLocaleString("en-US")
-  //           )
-  //           .replace(
-  //             `{VALUE2}`,
-  //             presaleData.tokensLeft?.toLocaleString("en-US")
-  //           )
-  //       );
-  //     else {
-  //       if (amount > presaleData.tokensLeft)
-  //         alert(
-  //           strings.minimumPurchWarn2.replace(
-  //             "{VALUE1}",
-  //             presaleData.tokensLeft?.toLocaleString("en-US")
-  //           )
-  //         );
-  //     }
-
-  //     setInLoading(false);
-  //     return false;
-  //   }
-
-  //   let address = await GetAccount(web3provider.current.instance);
-  //   if (!address) {
-  //     Disconnect();
-  //     return false;
-  //   }
-
-  //   setShowBuyModal(false);
-
-  //   purchaseToken = parseInt(purchaseToken);
-  //   let contract = getPresaleContract(web3provider.current.instance, true);
-  //   let balance = await GetBalance(web3provider.current.instance);
-  //   let gas = 0;
-  //   let price = 0;
-  //   let tokenContract;
-  //   let allowance = 0;
-
-  //   if (purchaseToken === 4) {
-  //     //If Ether
-  //     price = await contract.getEthAmount(amount);
-  //   } else {
-  //     //If stablecoin
-  //     price = await contract.getTokenAmount(amount, purchaseToken);
-  //     if (purchaseToken === 0) {
-  //       tokenContract = getUSDTContract(web3provider.current.instance, true);
-  //     } else if (purchaseToken === 1) {
-  //       tokenContract = getUSDCContract(web3provider.current.instance, true);
-  //     } else if (purchaseToken === 2) {
-  //       tokenContract = getBUSDContract(web3provider.current.instance, true);
-  //     } else if (purchaseToken === 3) {
-  //       tokenContract = getDAIContract(web3provider.current.instance, true);
-  //     }
-  //   }
-
-  //   try {
-  //     if (purchaseToken === 4) {
-  //       gas = await contract.estimateGas.buyWithEth(amount, {
-  //         from: address,
-  //         value: price,
-  //       });
-  //     } else {
-  //       const balance = await tokenContract.balanceOf(address);
-  //       if (parseInt(balance) < parseInt(price))
-  //         throw new Error("insufficient funds");
-
-  //       allowance = await tokenContract.allowance(
-  //         address,
-  //         config.presaleAddress
-  //       );
-
-  //       if (parseInt(allowance) < parseInt(price)) {
-  //         let actualPrice = price;
-
-  //         //Fix for USDT
-  //         if (purchaseToken === 0 && parseInt(allowance) > 0) actualPrice = 0;
-
-  //         gas = await tokenContract.estimateGas.approve(
-  //           config.presaleAddress,
-  //           actualPrice,
-  //           {
-  //             from: address,
-  //           }
-  //         );
-  //       }
-  //     }
-  //   } catch (err) {
-  //     if (err.reason && err.reason.indexOf(strings.invalidTime) > -1) {
-  //       alert(strings.presaleInactive);
-  //     } else if (
-  //       (err.data &&
-  //         err.data.message &&
-  //         err.data.message.indexOf("insufficient funds") > -1) ||
-  //       (err.message && err.message.indexOf("insufficient funds") > -1)
-  //     ) {
-  //       alert(strings.insufFunds);
-  //     } else alert(strings.impossToTx);
-
-  //     setInLoading(false);
-  //     await getPrepresaleData(2);
-  //     return false;
-  //   }
-
-  //   let neededPrice =
-  //     purchaseToken === 4 ? parseInt(price) + parseInt(gas) : parseInt(gas);
-
-  //   if (parseInt(balance) < neededPrice) {
-  //     alert(strings.insufFunds);
-  //     setInLoading(false);
-  //     await getPrepresaleData(2);
-  //     return false;
-  //   }
-
-  //   //Is allowance is enough to make a transaction
-  //   if (purchaseToken < 4) {
-  //     if (parseInt(allowance) < parseInt(price)) {
-  //       try {
-  //         //Fix for USDT
-  //         if (purchaseToken === 0 && parseInt(allowance) > 0) {
-  //           const receipt = await tokenContract.approve(
-  //             config.presaleAddress,
-  //             0
-  //           );
-  //           if (receipt.hash) setLoadingInfoText(strings.stayAndWait);
-  //           await receipt.wait();
-  //         }
-
-  //         const receipt = await tokenContract.approve(
-  //           config.presaleAddress,
-  //           price
-  //         );
-  //         if (receipt.hash) setLoadingInfoText(strings.stayAndWait);
-  //         await receipt.wait();
-  //         setLoadingInfoText(null);
-  //       } catch (err) {
-  //         setLoadingInfoText(null);
-  //         setInLoading(false);
-  //         await getPrepresaleData(2);
-  //         return false;
-  //       }
-  //     }
-
-  //     //Check for issues on stablecoins contract
-  //     try {
-  //       gas = await contract.estimateGas.buyWithUSD(amount, purchaseToken, {
-  //         from: address,
-  //       });
-  //     } catch (err) {
-  //       if (err.reason && err.reason.indexOf(strings.invalidTime) > -1) {
-  //         alert(strings.presaleInactive);
-  //       } else if (
-  //         err.data &&
-  //         err.data.message &&
-  //         err.data.message.indexOf("insufficient funds") > -1
-  //       ) {
-  //         alert(strings.insufFunds);
-  //       } else alert(strings.impossToTx);
-  //       setInLoading(false);
-  //       await getPrepresaleData(2);
-  //       return false;
-  //     }
-
-  //     if (parseInt(balance) < parseInt(gas)) {
-  //       alert(strings.insufFunds);
-  //       setInLoading(false);
-  //       await getPrepresaleData(2);
-  //       return false;
-  //     }
-  //   }
-
-  //   //Buying the token
-  //   try {
-  //     let receipt;
-
-  //     if (purchaseToken === 4) {
-  //       receipt = await contract.buyWithEth(amount, {
-  //         from: address,
-  //         value: price,
-  //       });
-  //     } else {
-  //       receipt = await contract.buyWithUSD(amount, purchaseToken, {
-  //         from: address,
-  //       });
-  //     }
-
-  //     if (receipt.hash) {
-  //       let info = presaleData;
-  //       info.statusText = strings.thankYou;
-  //       setPresaleData(info);
-  //       setCurStep(2);
-  //     } else {
-  //       alert(strings.goesWrong);
-  //       await getPrepresaleData(2);
-  //     }
-  //   } catch (err) {
-  //     if (err.reason && err.reason.indexOf(strings.tokPayFailed) > -1) {
-  //       alert(strings.insufFunds);
-  //     }
-  //     await getPrepresaleData(2);
-  //   }
-
-  //   setInLoading(false);
-  // };
-
-  // const claimTokens = async () => {
-  //   if (!web3provider.current.status) {
-  //     Disconnect();
-  //     return false;
-  //   }
-
-  //   if (presaleData.tokensBoughtByUser <= 0) {
-  //     alert(strings.claimNoFunds);
-  //     setInLoading(false);
-  //     return false;
-  //   }
-
-  //   let address = await GetAccount(web3provider.current.instance);
-  //   if (!address) {
-  //     Disconnect();
-  //     return false;
-  //   }
-
-  //   let contract = getPresaleContract(web3provider.current.instance, true);
-  //   let balance = await GetBalance(web3provider.current.instance);
-  //   let gas = 0;
-
-  //   try {
-  //     gas = await contract.estimateGas.claim({
-  //       from: address,
-  //     });
-  //   } catch (err) {
-  //     if (
-  //       (err.reason && err.reason.indexOf("insufficient funds") > -1) ||
-  //       (err.data &&
-  //         err.data.message &&
-  //         err.data.message.indexOf("insufficient funds") > -1)
-  //     ) {
-  //       alert(strings.insufFunds);
-  //     } else alert(strings.impossToTx);
-  //     setInLoading(false);
-  //     return false;
-  //   }
-
-  //   if (parseInt(balance) < parseInt(gas)) {
-  //     alert(strings.insufFunds);
-  //     setInLoading(false);
-  //     return false;
-  //   }
-
-  //   try {
-  //     let receipt = await contract.claim({
-  //       from: address,
-  //     });
-
-  //     if (receipt.hash) {
-  //       let info = presaleData;
-  //       info.statusText = strings.statClaimed;
-  //       setPresaleData(info);
-  //       setCurStep(2);
-  //     } else {
-  //       alert(strings.goesWrong);
-  //     }
-  //   } catch (err) {
-  //     setInLoading(false);
-  //     return false;
-  //   }
-
-  //   setInLoading(false);
-  // };
-
   const Disconnect = () => {
     DisconnectProvider(web3provider);
     setCurStep(0);
     setInLoading(false);
-    // setHideConnectButton(false);
   };
-
-  // useEffect(() => {
-  //   if (!inLoading && (presaleData || curStep >= 1)) {
-  //     setTimeout(() => {
-  //       progressLine.current.style.width =
-  //         progressLine.current.getAttribute("data-done") + "%";
-  //       progressLine.current.style.opacity = 1;
-  //     }, 100);
-  //   }
-  // }, [presaleData, curStep, inLoading]);
 
   useEffect(() => {
     curStepRef.current = curStep;
@@ -508,12 +181,6 @@ export default function Banner() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [refresh]);
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setRefresh((prev) => prev + 1);
-  //   }, 1000);
-  // }, []);
-
   return (
     <>
       <div className={["mainBanner", "timer", styles.banner].join(" ")}>
@@ -536,14 +203,13 @@ export default function Banner() {
             curStep === 1 ? styles.step1 : "",
           ].join(" ")}
         >
-          <div className={styles.presaleWrap}>
+          {/* <div className={styles.presaleWrap}></div> */}
+          <div className={styles.swdtknContainer}>
             <img
               src={images["home/presale.webp"]}
               alt="Swords of Blood"
               className={styles.presaleImage}
             />
-          </div>
-          <div className={styles.swdtknContainer}>
             <p className={styles.swdtkn}>GET YOUR SWDTKN FROM</p>
           </div>
           <div className={styles.MEXC}>
@@ -555,198 +221,8 @@ export default function Banner() {
               />
             </a>
           </div>
-          {/*
-            <div
-              className={[
-                styles.presaleWrapper,
-                inLoading ? styles.loading : styles.completed,
-              ].join(" ")}
-            >
-              {!inLoading && presaleData && (
-                <>
-                  <div className={styles.presaleAndText}>
-                    <img
-                      src={images["home/presale.webp"]}
-                      alt="Swords of Blood"
-                      className={styles.presaleImage}
-                    />
-                    <div className={styles.presaleTextAndAmount}>
-                      <span
-                        className={`text ${styles.titleText}`}
-                        style={{ textTransform: "uppercase" }}
-                      >
-                      {strings.presaleEnded}{" "} */}
-          {/* {presaleData.currentStage >= presaleData.totalPeriods ? presaleData.totalPeriods : presaleData.currentStage + 1}*/}{" "}
-          {/*   </span>
-
-                      <span className={styles.amountAndText}> */}
-          {/* 1 {config.tokenSymbol} = {presaleData.currentPrice} USDT */}
-          {/*    Launch price:{" "}
-                        <span className={`${styles.gold_bg} red-high`}>
-                          $0.015
-                        </span>
-                      </span>
-                    </div>
-                  </div>
-                  <div className={styles.instructions}>
-                    <p>{strings.stayTuned}</p>
-                  </div> */}
-          {/* {presaleData.nextPrice ? ( */}
-          {/* <p className={styles.info}>
-                    {strings.buyBefore
-                      .replace("{STAGE}", presaleData.currentStage + 2)
-                      .replace("{PRICE}", presaleData.nextPrice)}
-                    <br />
-
-                    <span>
-                      Launch price: <span className="red-high">$0.015</span>
-                    </span>
-                  </p> */}
-          {/* ) : (
-                    <p className={styles.info}>{strings.buyBeforeTheEnd}</p>
-                  )} */}
-          {/* <div className={styles.progress}>
-                    <div
-                      ref={progressLine}
-                      className={styles.progressDone}
-                      data-done={parseInt(presaleData.stagePercentsCompleted)}
-                    ></div>
-                  </div> */}
-          {/* <div className={styles.amountContainer}>
-                    <p className={styles.amountTextAndAmountNumber}>
-                      <span className={styles.amountText}>{strings.soldTtl}</span>
-                      <span className={styles.amountNumber}>
-                        {presaleData.totalTokensSold?.toLocaleString("en-US")} /{" "}
-                        {presaleData.stageTotalTokensTarget?.toLocaleString(
-                          "en-US"
-                        )}
-                      </span>
-                    </p>
-                    <p className={styles.amountTextAndAmountNumber}>
-                      <span className={styles.amountText}>
-                        {strings.raisedTtl}
-                      </span>
-                      <span className={styles.amountNumber}>
-                        ${presaleData.totalUSDraised?.toLocaleString("en-US")} / $
-                        {presaleData.stageTotalUSDTarget?.toLocaleString("en-US")}
-                      </span>
-                    </p>
-                    {curStep === 1 && (
-                      <p className={styles.amountTextAndAmountNumber}>
-                        <span className={styles.amountText}>
-                          {strings.youOwn}
-                        </span>
-                        <span className={styles.amountNumber}>
-                          {presaleData.tokensBoughtByUser?.toLocaleString(
-                            "en-US"
-                          )}{" "}
-                          {config.tokenSymbol}
-                        </span>
-                      </p>
-                    )}
-                  </div> */}
-          {/* <Countdown /> */}
-          {/*    </>
-              )} */}
-          {/* {curStep !== 1 && !hideConnectButton && (
-                <button
-                  onClick={connectWallet}
-                  className={`${styles.connectWallet} ${styles.loadingWalletButton}`}
-                >
-                  {strings.connectWallet}
-                </button>
-              )} */}
-          {/*  </div> */}
-          {/* {!inLoading && presaleData && curStep === 1 && (
-              <>
-                {!presaleData.buyBtnDisabled ? (
-                  <div className={styles.buyingMethod}>
-                    <button
-                      onClick={() => {
-                        setPurchaseToken(4);
-                        setShowBuyModal(true);
-                      }}
-                      className={styles.buyingButton}
-                    >
-                      {strings.buyWith} ETH
-                    </button>
-                    <button
-                      onClick={() => {
-                        setPurchaseToken(0);
-                        setShowBuyModal(true);
-                      }}
-                      className={styles.buyingButton}
-                    >
-                      {strings.buyWith} USDT
-                    </button>
-                    <button
-                      onClick={() => {
-                        setPurchaseToken(1);
-                        setShowBuyModal(true);
-                      }}
-                      className={styles.buyingButton}
-                    >
-                      {strings.buyWith} USDC
-                    </button>
-                    <button
-                      onClick={() => {
-                        setPurchaseToken(3);
-                        setShowBuyModal(true);
-                      }}
-                      className={styles.buyingButton}
-                    >
-                      {strings.buyWith} DAI
-                    </button>
-                  </div>
-                ) : (
-                  <button
-                    onClick={async () => {
-                      setInLoading(true);
-                      await claimTokens();
-                    }}
-                    className={styles.connectWallet}
-                  >
-                    {strings.claimTokens}
-                  </button>
-                )}
-              </>
-            )}
-            {!inLoading && curStep === 2 && (
-              <span className={styles.statusText}>{presaleData.statusText}</span>
-            )}
-            {inLoading && loadingInfoText && (
-              <span className={styles.loadingInfoText}>{loadingInfoText}</span>
-            )} */}
-          {/* <div className={styles.thankMessage}>
-              <p>{strings.thankyouForParticipating}</p>
-            </div> */}
         </div>
       </div>
-      {/* <ModalConnectWallet
-        showModal={showConnectModal}
-        setShowModal={setShowConnectModal}
-        afterConnect={() => {
-          loadUserData();
-        }}
-      />
-      {presaleData && (
-        <ModalBuy
-          showModal={showBuyModal}
-          setShowModal={setShowBuyModal}
-          purchaseToken={purchaseToken}
-          presaleData={presaleData}
-          buyAction={async (amount) => {
-            const total = 32500000;
-            // check the total amount + the total tokens already added
-            // if the total is more then the max return an alert
-            if (total < parseFloat(amount) + presaleData.totalTokensSold) {
-              return alert("oops we had a problem !");
-            }
-            setInLoading(true);
-            await buyTokens(parseFloat(amount), purchaseToken);
-          }}
-        />
-      )} */}
     </>
   );
 }

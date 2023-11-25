@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./banner.module.css";
 
 import "./custom.css";
@@ -6,33 +6,38 @@ import img from "../../images/home/hero3.webp";
 import video1 from "../../assets/videos/hero3.webm";
 import video2 from "../../assets/videos/hero3.mp4";
 let BannerVideo = () => {
-  const [isGreaterThan900px, setIsGreaterThan900px] = React.useState(false);
+  const [isGreaterThan768px, setIsGreaterThan768px] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     function handleResize() {
       if (window.innerWidth > 768) {
-        setIsGreaterThan900px(true);
+        setIsGreaterThan768px(true);
       } else {
-        setIsGreaterThan900px(false);
+        setIsGreaterThan768px(false);
       }
     }
-    console.log("isGreaterThan900px", isGreaterThan900px);
     handleResize();
+    console.log("isGreaterThan768px", isGreaterThan768px);
 
     window.addEventListener("resize", handleResize);
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  useEffect(() => {
+    console.log("rerender on isGreater Than");
+  }, [isGreaterThan768px]);
+
   return (
     <>
-      {isGreaterThan900px && (
+      {isGreaterThan768px && (
         <video
           style={{ pointerEvents: "none" }}
           className={["image desk-only", styles.image].join(" ")}
           autoPlay
           loop
           playsInline
+          muted
         >
           <source src={video1} type="video/webm" />
           <source src={video2} type="video/mp4" />

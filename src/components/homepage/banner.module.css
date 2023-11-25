@@ -25,7 +25,7 @@
   right: 0;
   max-width: 362px;
   top: 30px;
-  height: 179px;
+  height: 90px;
   border: 1px solid var(--primary-color);
   border-radius: 14px;
   bottom: 0;
@@ -58,26 +58,25 @@
 }
 
 .banner .presaleImage {
-  width: 60.97px;
-  height: 60px;
+  width: 28px;
+  height: auto;
 }
 
-
 .swdtknContainer {
-  background-color: #C9AB84;
+  background-color: #c9ab84;
   height: 35px;
   display: flex;
+  gap: 20px;
   justify-content: center;
   align-items: center;
 }
 
 .swdtkn {
   font-size: 20px;
-  color: #0A0A0A;
+  color: #0a0a0a;
   font-weight: 600;
   line-height: 25.52px;
   text-align: center;
-
 }
 
 .MEXC {
@@ -87,7 +86,7 @@
   margin: auto;
 }
 
-.mexcimg{
+.mexcimg {
   height: 25px;
 }
 
@@ -318,7 +317,7 @@
   font-weight: 600;
   line-height: normal;
 }
-@media only screen and (min-width: 991px) {
+@media only screen and (min-width: 992px) {
   .banner .connectWalletContainer {
     min-width: 350px;
   }
@@ -327,12 +326,12 @@
   }
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 992px) {
   .banner .connectWalletContainer {
+    margin-top: -20px !important;
     max-width: none;
   }
 }
-
 
 @media only screen and (max-width: 1440px) {
   .banner {
@@ -482,7 +481,6 @@
   .presaleTextAndAmount .titleText {
     font-size: 14px;
   }
-
 }
 
 @media only screen and (max-width: 370px) {

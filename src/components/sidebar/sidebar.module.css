@@ -220,8 +220,16 @@ img.gif {
   flex-direction: row;
   margin-top: 10px;
   align-items: center;
-  justify-content: center;
+  justify-content: left;
   gap: 10px;
+  padding-top: 20px;
+  padding-left: 33px;
+}
+
+@media only screen and (min-width: 992px) {
+  .adressAndLanugage {
+    display: none;
+  }
 }
 
 .languageChangingDropdown {
